@@ -48,7 +48,12 @@
                 }
               ],
               "outputHashing": "all",
-              "baseHref": "/Mic-Bug-Report/"
+              "baseHref": "/Mic-Bug-Report/",
+              "optimization": {
+                "scripts": true,
+                "styles": true,
+                "fonts": true
+              }
             },
             "development": {
               "optimization": false,
