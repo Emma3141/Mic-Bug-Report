@@ -1,6 +1,7 @@
 {
   "name": "bug-report",
   "version": "0.0.0",
+  "homepage": "https://emma3141.github.io/Mic-Bug-Report",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
