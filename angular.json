@@ -19,7 +19,8 @@
           "options": {
             "browser": "src/main.ts",
             "polyfills": [
-              "zone.js"
+              "zone.js",
+              "src/polyfills.ts"
             ],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
@@ -53,7 +54,8 @@
                 "scripts": true,
                 "styles": true,
                 "fonts": true
-              }
+              },
+              "serviceWorker": false
             },
             "development": {
               "optimization": false,
