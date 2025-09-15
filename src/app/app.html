@@ -1,0 +1,31 @@
+<div class="app-container">
+  <header>
+    <h1>Bug Report System</h1>
+    <div class="header-actions">
+      <button 
+        *ngIf="!isAuthenticated && !showAdminLogin" 
+        (click)="toggleAdminLogin()"
+        class="admin-btn"
+      >
+        Admin Login
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <div *ngIf="isAuthenticated" class="authenticated-view">
+      <app-moderator-panel></app-moderator-panel>
+    </div>
+
+    <div *ngIf="!isAuthenticated" class="guest-view">
+      <div *ngIf="showAdminLogin" class="admin-login-section">
+        <app-admin-login (loginSuccess)="onLoginSuccess()"></app-admin-login>
+        <button class="cancel-btn" (click)="toggleAdminLogin()">Cancel</button>
+      </div>
+
+      <div *ngIf="!showAdminLogin" class="guest-form-section">
+        <app-bug-report-form></app-bug-report-form>
+      </div>
+    </div>
+  </main>
+</div>

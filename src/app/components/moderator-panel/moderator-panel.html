@@ -1,0 +1,61 @@
+<div class="moderator-container">
+  <div class="header">
+    <h2>Moderator Panel</h2>
+    <button class="logout-btn" (click)="logout()">Logout</button>
+  </div>
+
+  <div class="reports-count">
+    Total Reports: {{ reports.length }}
+  </div>
+
+  <div class="reports-container" *ngIf="reports.length > 0; else noReports">
+    <div *ngFor="let report of reports" class="report-card" [class.unread]="!report.isRead">
+      <div class="report-header">
+        <h3>{{ report.name }}</h3>
+        <div class="report-actions">
+          <button 
+            *ngIf="!report.isRead" 
+            class="mark-read-btn" 
+            (click)="markAsRead(report.id!)"
+          >
+            Mark as Read
+          </button>
+          <button class="delete-btn" (click)="deleteReport(report.id!)">
+            Delete
+          </button>
+        </div>
+      </div>
+
+      <div class="report-details">
+        <div class="detail-row">
+          <strong>Email:</strong> {{ report.email }}
+        </div>
+        <div class="detail-row">
+          <strong>Timestamp:</strong> {{ formatTimestamp(report.timestamp) }}
+        </div>
+        <div class="detail-row">
+          <strong>Device:</strong> {{ report.device }}
+        </div>
+        <div class="detail-row">
+          <strong>Browser:</strong> {{ report.browser }}
+        </div>
+        <div class="detail-row">
+          <strong>OS:</strong> {{ report.os }}
+        </div>
+        <div class="detail-row" *ngIf="report.location">
+          <strong>Location:</strong> {{ getLocationString(report.location) }}
+        </div>
+        <div class="detail-row description">
+          <strong>Description:</strong>
+          <p>{{ report.description }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #noReports>
+    <div class="no-reports">
+      <p>No bug reports have been submitted yet.</p>
+    </div>
+  </ng-template>
+</div>

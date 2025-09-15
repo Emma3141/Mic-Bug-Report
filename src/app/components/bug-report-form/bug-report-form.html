@@ -1,0 +1,63 @@
+<div class="bug-report-container">
+  <h2>Report a Bug</h2>
+  
+  <div *ngIf="submitSuccess" class="success-message">
+    Thank you! Your bug report has been submitted successfully.
+  </div>
+
+  <form [formGroup]="reportForm" (ngSubmit)="onSubmit()" class="bug-report-form">
+    <div class="form-group">
+      <label for="name">Name *</label>
+      <input 
+        type="text" 
+        id="name" 
+        formControlName="name" 
+        class="form-control"
+        [class.invalid]="name?.invalid && name?.touched"
+      >
+      <div *ngIf="name?.invalid && name?.touched" class="error-message">
+        <span *ngIf="name?.errors?.['required']">Name is required</span>
+        <span *ngIf="name?.errors?.['minlength']">Name must be at least 2 characters</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email *</label>
+      <input 
+        type="email" 
+        id="email" 
+        formControlName="email" 
+        class="form-control"
+        [class.invalid]="email?.invalid && email?.touched"
+      >
+      <div *ngIf="email?.invalid && email?.touched" class="error-message">
+        <span *ngIf="email?.errors?.['required']">Email is required</span>
+        <span *ngIf="email?.errors?.['email']">Please enter a valid email</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="description">Bug Description *</label>
+      <textarea 
+        id="description" 
+        formControlName="description" 
+        rows="5" 
+        class="form-control"
+        [class.invalid]="description?.invalid && description?.touched"
+        placeholder="Please describe the bug you encountered..."
+      ></textarea>
+      <div *ngIf="description?.invalid && description?.touched" class="error-message">
+        <span *ngIf="description?.errors?.['required']">Description is required</span>
+        <span *ngIf="description?.errors?.['minlength']">Description must be at least 10 characters</span>
+      </div>
+    </div>
+
+    <button 
+      type="submit" 
+      class="submit-btn" 
+      [disabled]="reportForm.invalid || isSubmitting"
+    >
+      {{ isSubmitting ? 'Submitting...' : 'Submit Report' }}
+    </button>
+  </form>
+</div>
